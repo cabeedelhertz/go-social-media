@@ -9,18 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-/*
-
-CREATE TABLE IF NOT EXISTS followers (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    user_id uuid NOT NULL REFERENCES users(id),
-    follower_id uuid NOT NULL REFERENCES users(id),
-    created_at timestamptz NOT NULL DEFAULT now(),
-    updated_at timestamptz NOT NULL DEFAULT now(),
-    deleted_at timestamptz
-);
-*/
-
 type Follower struct {
 	ID         uuid.UUID      `gorm:"id"`
 	UserID     uuid.UUID      `gorm:"user_id"`

@@ -5,7 +5,9 @@ import (
 	"social/pkg/service"
 )
 
-func init() {}
+func init() {
+	// TODO: register defaults
+}
 
 type Config struct {
 	service.Config     `config:",squash"`

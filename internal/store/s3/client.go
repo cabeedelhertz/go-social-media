@@ -44,7 +44,7 @@ func (c *S3Client) GetImageURL(ctx context.Context, key string) (string, error) 
 		Key:    aws.String(key),
 	}
 	presignedResult, err := c.presignClient.PresignGetObject(ctx, presignInput, func(po *s3.PresignOptions) {
-		po.Expires = 15 * time.Minute // URL expires in 10 minutes
+		po.Expires = 15 * time.Minute
 	})
 	if err != nil {
 		return "", err

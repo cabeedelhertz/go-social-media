@@ -9,21 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-/*
-CREATE TYPE post_status AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
-
-CREATE TABLE IF NOT EXISTS posts (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    user_id uuid NOT NULL REFERENCES users(id),
-    description varchar NOT NULL,
-    status post_status NOT NULL DEFAULT 'DRAFT',
-    created_at timestamptz NOT NULL DEFAULT now(),
-    updated_at timestamptz NOT NULL DEFAULT now(),
-    deleted_at timestamptz
-);
-
-*/
-
 type PostStatus string
 
 const (
