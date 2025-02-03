@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 	"os/signal"
-	"social/pkg/common/logging"
+	"social/pkg/logging"
 	"syscall"
 	"time"
 

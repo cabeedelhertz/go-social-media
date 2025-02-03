@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"social/internal/models"
-	"social/pkg/common/logging"
+	"social/pkg/logging"
 	socialv1 "social/proto/gen/social/v1"
 	"strings"
 	"time"

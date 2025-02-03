@@ -2,7 +2,7 @@ package logging
 
 import (
 	"context"
-	"social/pkg/common/config"
+	"social/pkg/config"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

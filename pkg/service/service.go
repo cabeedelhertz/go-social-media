@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"social/pkg/common/logging"
+	"social/pkg/logging"
 	"social/pkg/service/system"
 
 	"go.opentelemetry.io/otel/metric"

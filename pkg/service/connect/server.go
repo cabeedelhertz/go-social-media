@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"social/pkg/common/logging"
+	"social/pkg/logging"
 	"social/pkg/service"
 	"social/pkg/service/auth"
 	"strings"

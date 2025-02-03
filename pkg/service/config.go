@@ -1,7 +1,7 @@
 package service
 
 import (
-	"social/pkg/common/config"
+	"social/pkg/config"
 	"time"
 )
 

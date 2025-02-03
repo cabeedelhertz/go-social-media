@@ -3,7 +3,7 @@ package main
 import (
 	"social"
 	"social/db"
-	"social/pkg/common/logging"
+	"social/pkg/logging"
 	"social/pkg/service"
 	"social/pkg/service/connect"
 	"social/proto/gen/social/v1/socialv1connect"

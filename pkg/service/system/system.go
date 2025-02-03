@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"social/pkg/common/config"
-	"social/pkg/common/logging"
+	"social/pkg/config"
+	"social/pkg/logging"
 	"sync"
 
 	"go.uber.org/zap"
