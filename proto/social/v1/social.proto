@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+package social.v1;
+
+import "google/protobuf/timestamp.proto";
+
+
+message User {
+	string id = 1;
+	string external_auth_id = 2;
+	string first_name = 3;
+	string last_name = 4;
+	string email = 5;
+	string username = 6;
+	string photo_url = 7;
+	google.protobuf.Timestamp last_login_time = 8;
+	google.protobuf.Timestamp created_at = 9;
+	google.protobuf.Timestamp updated_at = 10;
+	google.protobuf.Timestamp deleted_at = 11;
+	string bio = 12;
+	int64 follower_count = 13;
+	int64 following_count = 14;
+}
+
+message ListUsersRequest {
+	string search_term = 1;
+}
+
+message ListUsersResponse {
+	repeated User users = 1;
+}
+
+enum PostStatus {
+	POST_STATUS_UNSPECIFIED = 0;
+	POST_STATUS_DRAFT = 1;
+	POST_STATUS_PUBLISHED = 2;
+	POST_STATUS_ARCHIVED = 3;
+}
+
+message Post {
+	string id = 1;
+    string caption = 2;
+    string user_id = 3;
+    repeated string image_urls = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+	PostStatus status = 8;
+	repeated PostImage images = 9;
+	User creator = 10;
+	repeated PostComment comments = 11;
+	repeated PostLike likes = 12;
+	int64 like_count = 13;
+	int64 comment_count = 14;
+}
+
+message PostImage {
+	string id = 1;
+	string post_id = 2;
+	string url = 3;
+	string object_key = 4;
+}
+
+message PostComment {
+	string id = 1;
+	string post_id = 2;
+	string user_id = 3;
+	string content = 4;
+	google.protobuf.Timestamp created_at = 5;
+	google.protobuf.Timestamp updated_at = 6;
+}
+
+message PostLike {
+	string id = 1;
+	string post_id = 2;
+	string user_id = 3;
+	google.protobuf.Timestamp created_at = 4;
+	google.protobuf.Timestamp updated_at = 5;
+}
+
+message LikePostRequest {
+	string post_id = 1;
+	string user_id = 2;
+}
+
+message LikePostResponse {
+	Post post = 1;
+}
+
+message UnlikePostRequest {
+	string post_id = 1;
+	string user_id = 2;
+}
+
+message UnlikePostResponse {
+	Post post = 1;
+}
+
+message HasUserLikedPostRequest {
+	string post_id = 1;
+	string user_id = 2;
+}
+
+message HasUserLikedPostResponse {
+	bool liked = 1;
+}
+
+message CreatePostRequest {
+	string caption = 1;
+    string user_id = 2;
+}
+
+message CreatePostResponse {
+	Post post = 1;
+}
+
+message UpdatePostRequest {
+	string id = 1;
+	string caption = 2;
+}
+
+message UpdatePostResponse {
+	Post post = 1;
+}
+
+message AddImageRequest {
+	string post_id = 1;
+	ImageUploadRequest image = 2;
+	int32 order_index = 3;
+}
+
+message ImageUploadRequest {
+	bytes content = 1;
+}
+
+message AddImageResponse {
+	Post post = 1;
+}
+
+message PublishPostRequest {
+	string post_id = 1;
+}
+
+message PublishPostResponse {
+	Post post = 1;
+}
+
+message GetPostRequest {
+	string id = 1;
+}
+
+message GetPostResponse {
+	Post post = 1;
+}
+
+message GetPostImageRequest {
+	string id = 1;
+	string post_id = 2;
+}
+
+message GetPostImageResponse {
+	PostImage image = 1;
+}
+
+message ListPostsRequest {
+	string user_id = 1;
+}
+
+message ListPostsResponse {
+	repeated Post posts = 1;
+}
+
+message CreateOrUpdateUserRequest {
+	User user = 1;
+}
+
+message CreateOrUpdateUserResponse {
+	User user = 1;
+}
+
+message GetUserRequest {
+	string id = 1;
+}
+
+message GetUserResponse {
+	User user = 1;
+}
+
+message Follower {
+	string id = 1;
+	string user_id = 2;
+	string follower_id = 3;
+	google.protobuf.Timestamp created_at = 4;
+	google.protobuf.Timestamp updated_at = 5;
+}
+
+message FollowUserRequest {
+	string user_id = 1;
+}
+
+message FollowUserResponse {}
+
+message UnfollowUserRequest {
+	string user_id = 1;
+}
+
+message UnfollowUserResponse {}
+
+message ListFollowersRequest {
+	string user_id = 1;
+}
+
+message ListFollowersResponse {
+	repeated Follower followers = 1;
+}
+
+message IsFollowingRequest {
+	string user_id = 1;
+}
+
+message IsFollowingResponse {
+	bool following = 1;
+}
+
+service SocialService {
+	rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+	rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+	rpc AddImage(AddImageRequest) returns (AddImageResponse);
+	rpc PublishPost(PublishPostRequest) returns (PublishPostResponse);
+	rpc GetPost(GetPostRequest) returns (GetPostResponse);
+	rpc GetPostImage(GetPostImageRequest) returns (GetPostImageResponse);
+	rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+	rpc CreateOrUpdateUser(CreateOrUpdateUserRequest) returns (CreateOrUpdateUserResponse);
+	rpc GetUser(GetUserRequest) returns (GetUserResponse);
+	rpc LikePost(LikePostRequest) returns (LikePostResponse);
+	rpc UnlikePost(UnlikePostRequest) returns (UnlikePostResponse);
+	rpc HasUserLikedPost(HasUserLikedPostRequest) returns (HasUserLikedPostResponse);
+	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+	rpc FollowUser(FollowUserRequest) returns (FollowUserResponse);
+	rpc UnfollowUser(UnfollowUserRequest) returns (UnfollowUserResponse);
+	rpc ListFollowers(ListFollowersRequest) returns (ListFollowersResponse);
+	rpc IsFollowing(IsFollowingRequest) returns (IsFollowingResponse);
+}
